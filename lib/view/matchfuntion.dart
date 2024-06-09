@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class matchfuntion extends StatefulWidget {
   const matchfuntion({super.key});
@@ -22,6 +22,62 @@ class _matchfuntionState extends State<matchfuntion> {
       _selectedIndex = index;
     });
   }
+
+   List<Map<String, dynamic>> matchData = [
+    {
+      'team1Name': 'Arsenal',
+      'team1Image': 'redlogo.png',
+      'matchTime': '17:00',
+      'venue': 'Emirates',
+      'team2Name': 'Chelsea',
+      'team2Image': 'flogo.png',
+    },
+    {
+      'team1Name': 'Chelsea',
+      'team1Image': 'brazil.png',
+      'matchTime': '19:30',
+      'venue': 'Old Trafford',
+      'team2Name': 'Arsenal',
+      'team2Image': 'brazil.png',
+    },
+     {
+      'team1Name': 'Chelsea',
+      'team1Image': 'aregen.png',
+      'matchTime': '19:30',
+      'venue': 'Old Trafford',
+      'team2Name': 'Arsenal',
+      'team2Image': 'redlogo.png',
+    },
+     {
+      'team1Name': 'Chelsea',
+      'team1Image': 'redlogo.png',
+      'matchTime': '19:30',
+      'venue': 'Old Trafford',
+      'team2Name': 'Arsenal',
+      'team2Image': 'manchester.png',
+    },
+     {
+      'team1Name': 'Chelsea',
+      'team1Image': 'panchuca.png',
+      'matchTime': '19:30',
+      'venue': 'Old Trafford',
+      'team2Name': 'Arsenal',
+      'team2Image': 'redlogo.png',
+    },
+  
+  ];
+   List<IconData> icons = [
+    FontAwesomeIcons.footballBall,
+    FontAwesomeIcons.basketballBall,
+    FontAwesomeIcons.hockeyPuck,
+    FontAwesomeIcons.volleyball,
+    FontAwesomeIcons.tableTennisPaddleBall,
+  
+  ];
+
+  late String imageUrl;
+  late String imageUrl1;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -250,43 +306,78 @@ body: Padding(
     SizedBox(height:20,),
      SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    CircularIconContainer(icon: FontAwesomeIcons.footballBall),
-                    CircularIconContainer(icon: FontAwesomeIcons.basketballBall),
-                    CircularIconContainer(icon: FontAwesomeIcons.hockeyPuck),
-                    CircularIconContainer(icon: FontAwesomeIcons.baseballBall),
-                    CircularIconContainer(icon: FontAwesomeIcons.volleyballBall),
-                    CircularIconContainer(icon: FontAwesomeIcons.tableTennis),
-                  ],
+                // child: Row(
+                //   children: [
+                //     // CircularIconContainer(icon: FontAwesomeIcons.footballBall),
+                //     // CircularIconContainer(icon: FontAwesomeIcons.basketballBall),
+                //     // CircularIconContainer(icon: FontAwesomeIcons.hockeyPuck),
+                //     // CircularIconContainer(icon: FontAwesomeIcons.baseballBall),
+                //     // CircularIconContainer(icon: FontAwesomeIcons.volleyballBall),
+                //     // CircularIconContainer(icon: FontAwesomeIcons.tableTennis),
+                //        for (int i = 0; i < matchData.length; i++)
+                //       CircularIconContainer(
+                //         icon: FontAwesomeIcons.footballBall,
+                //         isSelected: i == _selectedIndex,
+                //         onTap: () => _onItemTapped(i),
+                //       ),
+                //   ],
+                // ),
+                  child: Row(
+                  children: List.generate(icons.length, (index) {
+                    return CircularIconContainer(
+                      icon: icons[index],
+                      isSelected: index == _selectedIndex,
+                      onTap: () => _onItemTapped(index),
+                    );
+                  }),
                 ),
               ),
                SizedBox(height:20,),
+              //    MatchContainer(
+              //   team1Name: 'Arsenal',
+              //   team1Image: 'assets/manchester.png',
+              //   matchTime: '17:00',
+              //   venue: 'Emirates',
+              //   team2Name: 'Chelsea',
+              //   team2Image: 'assets/manchester.png',
+              // ),
+              // SizedBox(height: 10),
+              // MatchContainer(
+              //   team1Name: 'Arsenal',
+              //   team1Image: 'assets/manchester.png',
+              //   matchTime: '19:30',
+              //   venue: 'Emirates',
+              //   team2Name: 'Chelsea',
+              //   team2Image:'assets/manchester.png',
+              // ),
+              //   SizedBox(height: 10),
+              //    MatchContainer(
+              //   team1Name: 'Arsenal',
+              //   team1Image: 'assets/manchester.png',
+              //   matchTime: '19:30',
+              //   venue: 'Emirates',
+              //   team2Name: 'Everton',
+              //   team2Image:'assets/manchester.png',
+              // )
+              // ,
                  MatchContainer(
-                team1Name: 'Arsenal',
-                team1Image: 'assets/manchester.png',
-                matchTime: '17:00',
-                venue: 'Emirates',
-                team2Name: 'Chelsea',
-                team2Image: 'assets/manchester.png',
+                team1Name: matchData[_selectedIndex]['team1Name'],
+                team1ImagePath: matchData[_selectedIndex]['team1Image'],
+                matchTime: matchData[_selectedIndex]['matchTime'],
+                venue: matchData[_selectedIndex]['venue'],
+                team2Name: matchData[_selectedIndex]['team2Name'],
+                team2Image: matchData[_selectedIndex]['team2Image'], 
+                team2ImagePath:matchData[_selectedIndex]['team2Image'], 
               ),
-              SizedBox(height: 10),
-              MatchContainer(
-                team1Name: 'Arsenal',
-                team1Image: 'assets/manchester.png',
-                matchTime: '19:30',
-                venue: 'Emirates',
-                team2Name: 'Chelsea',
-                team2Image:'assets/manchester.png',
-              ),
-                SizedBox(height: 10),
-                 MatchContainer(
-                team1Name: 'Arsenal',
-                team1Image: 'assets/manchester.png',
-                matchTime: '19:30',
-                venue: 'Emirates',
-                team2Name: 'Everton',
-                team2Image:'assets/manchester.png',
+              SizedBox(height: 10,),
+                MatchContainer(
+                team1Name: matchData[_selectedIndex]['team1Name'],
+                team1ImagePath: matchData[_selectedIndex]['team1Image'],
+                matchTime: matchData[_selectedIndex]['matchTime'],
+                venue: matchData[_selectedIndex]['venue'],
+                team2Name: matchData[_selectedIndex]['team2Name'],
+                team2Image: matchData[_selectedIndex]['team2Image'],
+                team2ImagePath:matchData[_selectedIndex]['team2Image'] ,
               ),
       ],
     ),
@@ -345,25 +436,62 @@ body: Padding(
   }
 }
 
+// class CircularIconContainer extends StatelessWidget {
+//   final IconData icon;
+
+//   CircularIconContainer({required this.icon});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//       child: Container(
+//         height: 70,
+//         width: 70,
+//         decoration: BoxDecoration(
+//           color: Color.fromARGB(138, 219, 214, 214),
+//           shape: BoxShape.circle,
+         
+//         ),
+//         child: Icon(icon, color: Color.fromARGB(189, 114, 112, 112),size: 35,),
+//       ),
+//     );
+//   }
+// }
+
 class CircularIconContainer extends StatelessWidget {
   final IconData icon;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  CircularIconContainer({required this.icon});
+  CircularIconContainer({required this.icon, required this.isSelected, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Container(
-        height: 70,
-        width: 70,
-        decoration: BoxDecoration(
-          color: Color.fromARGB(138, 219, 214, 214),
-          shape: BoxShape.circle,
-         
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 70,
+          width: 70,
+          decoration: BoxDecoration(
+            color: isSelected
+                ? Color.fromARGB(255, 32, 19, 64) // Selected color
+                : Color.fromARGB(138, 219, 214, 214), // Default color
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            icon,
+            color: isSelected
+                ? Color.fromARGB(255, 255, 255, 255) // Selected icon color
+                : Color.fromARGB(189, 114, 112, 112), // Default icon color
+            size: 35,
+          ),
         ),
-        child: Icon(icon, color: Color.fromARGB(189, 114, 112, 112),size: 35,),
       ),
     );
   }
 }
+
+

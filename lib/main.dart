@@ -1,6 +1,7 @@
 import 'package:batting_app/firebase_options.dart';
 import 'package:batting_app/view/home.dart';
 import 'package:batting_app/view/loginpage.dart';
+import 'package:batting_app/view/matchfuntion.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
