@@ -99,7 +99,7 @@ class _HomeLogosState extends State<HomeLogos> {
             onTap: () {
                Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => matchfuntion()));
+              MaterialPageRoute(builder: (context) => MatchFunction()));
             },
              child: Container(
               height: 55,

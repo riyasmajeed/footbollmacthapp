@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CircularIconContainer extends StatelessWidget {
   final IconData icon;
 
-  CircularIconContainer({required this.icon});
+  CircularIconContainer({required this.icon, required bool isSelected, required void Function() onTap});
 
   @override
   Widget build(BuildContext context) {

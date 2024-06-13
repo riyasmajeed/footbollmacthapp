@@ -88,6 +88,7 @@ class _LoginpageState extends State<Loginpage> {
                       fillColor: Colors.white,
                       border: const OutlineInputBorder(),
                       hintText: 'Password',
+                      
                     ),
                     obscureText: true,
                   ),

@@ -119,6 +119,8 @@ class _SigningPageState extends State<SigningPage> {
                                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                 )
                               : const Text("CREATE"),
+
+                              
                         ),
                         const SizedBox(width: 15),
                         ElevatedButton(
@@ -127,7 +129,7 @@ class _SigningPageState extends State<SigningPage> {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                  
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(
@@ -204,6 +206,9 @@ class _SigningPageState extends State<SigningPage> {
     if (signUpSuccess != null) {
       _showToast("User created successfully");
       // Navigate to another page or perform any other action upon successful sign-up
+        Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) =>  SigningPage()),
+      );
     } else {
       _showToast("Failed to create user. Please try again.");
     }
